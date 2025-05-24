@@ -2,184 +2,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadhi’s Eve Snacks</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fff8f0;
-            color: #333;
-        }
-        header {
-            background: url('https://via.placeholder.com/1600x400/ff6f61/ffffff?text=Aadhi%27s+Eve+Snacks') no-repeat center center/cover;
-            color: white;
-            padding: 4rem 1rem;
-            text-align: center;
-            animation: pop 1s ease-in-out;
-        }
-        @keyframes pop {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        nav {
-            background-color: #ffb347;
-            text-align: center;
-            padding: 0.5rem;
-        }
-        nav a {
-            margin: 0 1rem;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-        section {
-            padding: 2rem;
-            max-width: 800px;
-            margin: auto;
-        }
-        h2 {
-            color: #ff6f61;
-        }
-        .menu-list, .contact-info, .gallery, .contact-form {
-            background-color: #fff0e6;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        .gallery img {
-            width: 100%;
-            max-width: 200px;
-            margin: 10px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.1);
-        }
-        .contact-info a {
-            color: #ff6f61;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .contact-form button {
-            background-color: #ff6f61;
-            color: white;
-            padding: 0.7rem 1.2rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .contact-form button:hover {
-            background-color: #ff4f41;
-        }
-        iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #ffb347;
-            color: white;
-        }
-        @media (max-width: 600px) {
-            header {
-                padding: 2rem 1rem;
-                font-size: 1.5rem;
-            }
-            nav a {
-                display: block;
-                margin: 0.5rem 0;
-            }
-            .gallery img {
-                max-width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aadhi’s Eve Snacks</title>
+<style>
+  /* Sea Green colors */
+  :root {
+    --sea-green: #2E8B57;
+    --sea-green-light: #3ca06d;
+    --sea-green-dark: #246d44;
+    --background: #e6f2e6;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--sea-green-dark);
+    overflow-x: hidden; /* prevent horizontal scroll from side images */
+  }
+
+  header {
+    position: relative;
+    height: 350px;
+    background-color: var(--sea-green);
+    color: white;
+    padding: 3rem 1rem 1rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Moving moon */
+  .moon {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+    border-radius: 50%;
+    box-shadow: inset -15px 10px 10px rgba(0,0,0,0.1);
+    animation: moveMoon 20s linear infinite;
+  }
+
+  @keyframes moveMoon {
+    0% { top: 40px; right: 50px; }
+    50% { top: 60px; right: 150px; }
+    100% { top: 40px; right: 50px; }
+  }
+
+  /* Stars */
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+  .star:nth-child(1) { top: 30px; left: 40px; width: 6px; height: 6px; animation-delay: 0s;}
+  .star:nth-child(2) { top: 80px; left: 120px; width: 4px; height: 4px; animation-delay: 1s;}
+  .star:nth-child(3) { top: 120px; left: 80px; width: 5px; height: 5px; animation-delay: 1.5s;}
+  .star:nth-child(4) { top: 100px; right: 100px; width: 3px; height: 3px; animation-delay: 0.5s;}
+  .star:nth-child(5) { top: 50px; right: 130px; width: 7px; height: 7px; animation-delay: 2s;}
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+  }
+
+  h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 3rem;
+  }
+  p.subtitle {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+  }
+
+  /* Baby boy photos container */
+  .baby-photos {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+  .baby-photos img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 5px #fff;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .baby-photos img:hover {
+    transform: scale(1.2);
+  }
+
+  nav {
+    background-color: var(--sea-green);
+    text-align: center;
+    padding: 0.5rem;
+  }
+  nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+
+  section {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    color: var(--sea-green-dark);
+  }
+
+  h2 {
+    color: var(--sea-green);
+  }
+
+  .menu-list, .contact-info, .gallery, .contact-form {
+    background-color: #d5ebd5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+  .gallery img:hover {
+    transform: scale(1.1);
+  }
+
+  .contact-info a {
+    color: var(--sea-green);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid var(--sea-green);
+    border-radius: 4px;
+  }
+
+  .contact-form button {
+    background-color: var(--sea-green);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .contact-form button:hover {
+    background-color: var(--sea-green-dark);
+  }
+
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--sea-green);
+    color: white;
+  }
+
+  /* Dancing burgers, cakes, cookies on sides */
+  .side-anim {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    cursor: pointer;
+    animation: bounce 3s ease-in-out infinite;
+    z-index: 1000;
+  }
+
+  .side-left {
+    left: 5px;
+  }
+  .side-right {
+    right: 5px;
+  }
+
+  .side-anim:nth-child(odd) {
+    animation-delay: 0s;
+  }
+  .side-anim:nth-child(even) {
+    animation-delay: 1.5s;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(-50%) translateY(0); }
+    50% { transform: translateY(-50%) translateY(-20px); }
+  }
+
+  @media (max-width: 768px) {
+    .side-anim {
+      display: none; /* Hide side animations on small screens */
+    }
+    .baby-photos {
+      justify-content: flex-start;
+      padding: 0 1rem;
+    }
+  }
+</style>
 </head>
 <body>
 
 <header>
-    <h1>Aadhi’s Eve Snacks</h1>
-    <p>Where Every Bite Tells a Story</p>
+  <h1>Aadhi’s Eve Snacks</h1>
+  <p class="subtitle">Where Every Bite Tells a Story</p>
+
+  <!-- Baby photos -->
+  <div class="baby-photos">
+    <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Baby boy 1" />
+    <img src="https://randomuser.me/api/portraits/lego/2.jpg" alt="Baby boy 2" />
+    <img src="https://randomuser.me/api/portraits/lego/3.jpg" alt="Baby boy 3" />
+    <img src="https://randomuser.me/api/portraits/lego/4.jpg" alt="Baby boy 4" />
+    <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="Baby boy 5" />
+  </div>
+
+  <!-- Moon and stars -->
+  <div class="moon"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
 </header>
 
+<!-- Dancing snacks left side -->
+<img src="https://img.icons8.com/color/96/burger.png" alt="Dancing Burger" class="side-anim side-left" style="top:40%;" />
+<img src="https://img.icons8.com/color/96/cake.png" alt="Dancing Cake" class="side-anim side-left" style="top:60%;" />
+
+<!-- Dancing snacks right side -->
+<img src="https://img.icons8.com/color/96/cookie.png" alt="Dancing Cookie" class="side-anim side-right" style="top:45%;" />
+<img src="https://img.icons8.com/color/96/cupcake.png" alt="Dancing Cupcake" class="side-anim side-right" style="top:65%;" />
+
 <nav>
-    <a href="#about">About Me</a>
-    <a href="#menu">Menu List</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Location & Contact</a>
-    <a href="#blog">Blog</a>
+  <a href="#about">About Me</a>
+  <a href="#menu">Menu List</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Location & Contact</a>
+  <a href="#blog">Blog</a>
 </nav>
 
 <section id="about">
-    <h2>About Me</h2>
-    <p>Welcome to Aadhi’s Eve Snacks! I’m Aadhi, a passionate home chef who loves to experiment with unique flavors and traditional recipes. Each snack is crafted with love, bringing a creative twist to your kitchen experience.</p>
+  <h2>About Me</h2>
+  <p>Hello! I’m Aadhira Rudhran, just 17 months old and already passionate about creating healthy, tasty snacks for everyone to enjoy. At Aadhi’s Eve Snacks, I focus on crafting nutritious treats that bring joy and wellness together. Every snack is made with love and care, perfect for those who want delicious flavors without compromising on health. Join me on this wholesome journey where every bite is a step toward better snacking!</p>
 </section>
 
 <section id="menu">
-    <h2>Menu List</h2>
-    <div class="menu-list">
-        <ul>
-            <li>✨ Spicy Masala Puffs</li>
-            <li>🍪 Handmade Chocolate Chip Cookies</li>
-            <li>🥞 Fluffy Pancakes with Syrup</li>
-            <li>🍹 Refreshing Mocktails</li>
-            <li>🥪 Gourmet Sandwiches with a Twist</li>
-        </ul>
-    </div>
+  <h2>Menu List</h2>
+  <div class="menu-list">
+    <ul>
+      <li>✨ Spicy Masala Puffs</li>
+      <li>🍪 Handmade Chocolate Chip Cookies</li>
+      <li>🥞 Fluffy Pancakes with Syrup</li>
+      <li>🍹 Refreshing Mocktails</li>
+      <li>🥪 Gourmet Sandwiches with a Twist</li>
+    </ul>
+  </div>
 </section>
 
 <section id="gallery">
-    <h2>Gallery</h2>
-    <div class="gallery">
-        <img src="https://via.placeholder.com/200?text=Masala+Puffs" alt="Masala Puffs">
-        <img src="https://via.placeholder.com/200?text=Cookies" alt="Cookies">
-        <img src="https://via.placeholder.com/200?text=Pancakes" alt="Pancakes">
-        <img src="https://via.placeholder.com/200?text=Mocktails" alt="Mocktails">
-        <img src="https://via.placeholder.com/200?text=Sandwiches" alt="Sandwiches">
-    </div>
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <img src="https://via.placeholder.com/200?text=Masala+Puffs" alt="Masala Puffs" />
+    <img src="https://via.placeholder.com/200?text=Cookies" alt="Cookies" />
+    <img src="https://via.placeholder.com/200?text=Pancakes" alt="Pancakes" />
+    <img src="https://via.placeholder.com/200?text=Mocktails" alt="Mocktails" />
+    <img src="https://via.placeholder.com/200?text=Sandwiches" alt="Sandwiches" />
+  </div>
 </section>
 
 <section id="contact">
-    <h2>Location & Contact</h2>
-    <div class="contact-info">
-        <p><strong>Location:</strong> 123 Snack Street, Flavor Town</p>
-        <p><strong>Email:</strong> <a href="mailto:aadhievesnacks@example.com">aadhievesnacks@example.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
-        <p><strong>Instagram:</strong> <a href="https://instagram.com/aadhievesnacks" target="_blank">@aadhievesnacks</a></p>
-        <iframe src="https://www.google.com/maps/embed/v1/place?q=Flavor+Town&key=YOUR_GOOGLE_MAPS_API_KEY" allowfullscreen></iframe>
-    </div>
-    <div class="contact-form">
-        <h3>Contact Me</h3>
-        <form>
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
+  <h2>Location & Contact</h2>
+  <div class="contact-info">
+    <p><strong>Location:</strong> 123 Snack Street, Flavor Town</p>
+    <p><strong>Email:</strong> <a href="mailto:aadhievesnacks@example.com">aadhievesnacks@example.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+    <p><strong>Instagram:</strong> <a href="https://instagram.com/aadhievesnacks" target="_blank">@aadhievesnacks</a></p>
+    <iframe src="https://www.google.com/maps/embed/v1/place?q=Flavor+Town&key=YOUR_GOOGLE_MAPS_API_KEY" allowfullscreen></iframe>
+  </div>
+  <div class="contact-form">
+    <h3>Contact Me</h3>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
 </section>
 
 <section id="blog">
-    <h2>Blog</h2>
-    <p>Stay tuned for delicious recipes, snack tips, and behind-the-scenes stories from my kitchen! Check back soon for updates.</p>
+  <h2>Blog</h2>
+  <p>Stay tuned for delicious recipes, snack tips, and behind-the-scenes stories from my kitchen! Check back soon for updates.</p>
 </section>
 
 <footer>
-    &copy; 2025 Aadhi’s Eve Snacks | Crafted with ❤️ in Flavor Town
+  &copy; 2025 Aadhi’s Eve Snacks | Crafted with ❤️ in Flavor Town
 </footer>
 
 </body>
